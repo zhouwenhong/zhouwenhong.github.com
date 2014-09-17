@@ -11,27 +11,27 @@
 
 	animateList = [
 	    function () {
-	        $('#slide_1').delay(0).animate({
+	        $('#slide_1').animate({
 	            top: 300
 	        }, 450, queueList);
 	    },    
 	    function () {
-	        $('#slide_2').delay(0).animate({
+	        $('#slide_2').animate({
 	            top: 300
 	        }, 400, queueList);
 	    },   
 	    function () {
-	        $('#slide_3').delay(0).animate({
+	        $('#slide_3').animate({
 	            top: 300
 	        }, 300, queueList);
 	    },    
 	    function () {
-	        $('#slide_4').delay(0).animate({
+	        $('#slide_4').animate({
 	            top: 300
 	        }, 200, queueList);
 	    },   
 	    function () {
-	        $('#slide_5').delay(0).animate({
+	        $('#slide_5').animate({
 	            top: 300
 	        }, 100, queueList);
 	    }
@@ -42,6 +42,8 @@
 	    $doc.queue('ver_queue', animateList);
 	    console.log($doc.queue(verQueue).length)
 	    queueList();
+	    console.log($doc.queue(verQueue).length)
+
 	}
 
 
@@ -51,8 +53,12 @@
 
 
 	function reset(){
+		$doc.stop(verQueue, true, true);
+		console.log("stop: "+ $doc.queue(verQueue).length)
+
 		var dtd = $.Deferred();
 		var tasks = function(){
+
 			$slide_1.css('top', 0);
 			$slide_2.css('top', 0);
 			$slide_3.css('top', 0);
@@ -68,6 +74,7 @@
 	}
 
 	function init(){
+
 		$('#start').click(function(){
 			if($doc.queue(verQueue).length){
 				return false;
@@ -78,8 +85,6 @@
 		});
 
 		$('#reset').click(function(){
-			$doc.stop(verQueue, true, true);
-			console.log("stop: "+ $doc.queue(verQueue).length)
 			reset();
 		});
 	}
